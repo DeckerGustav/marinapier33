@@ -181,3 +181,62 @@ ul,dl,dd{margin:0;padding:0;list-style:none}
 .mapa{display:flex;flex-direction:column;gap:12px}
 .mapa iframe{display:block;width:100%;aspect-ratio:4/3;border:0;background:var(--mist)}
 .mapa a{font-family:var(--sans);font-weight:500;font-size:17px;align-self:flex-start}
+
+/* menu para celular */
+.menu-toggle{display:none;align-items:center;gap:12px;min-height:44px;padding:0 16px;background:none;border:1px solid var(--ink);border-radius:2px;font-family:var(--sans);font-weight:500;font-size:16px;color:var(--ink);cursor:pointer}
+.menu-bars{display:block;position:relative;width:18px;height:2px;background:currentColor}
+.menu-bars::before,.menu-bars::after{content:"";position:absolute;left:0;width:100%;height:2px;background:currentColor}
+.menu-bars::before{top:-6px}
+.menu-bars::after{top:6px}
+.menu-toggle[aria-expanded="true"] .menu-bars{background:transparent}
+.menu-toggle[aria-expanded="true"] .menu-bars::before{top:0;transform:rotate(45deg)}
+.menu-toggle[aria-expanded="true"] .menu-bars::after{top:0;transform:rotate(-45deg)}
+@media (max-width:760px){
+  .menu-toggle{display:inline-flex}
+  .nav{flex-basis:100%}
+  .js .nav{display:none;flex-direction:column;align-items:stretch;gap:0;padding-bottom:8px}
+  .js .nav.is-open{display:flex}
+  .js .nav a{padding:14px 0;border-bottom:1px solid var(--line);font-size:18px}
+  .js .nav a.btn{margin-top:14px;justify-content:center;border-bottom:0}
+}
+
+/* formulário de orçamento */
+.orcamento{background:var(--mist)}
+.orcamento-grid{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);gap:64px;align-items:start}
+.orcamento h2{font-weight:400;font-size:clamp(32px,3.6vw,46px);line-height:1.12;margin-bottom:20px}
+.orcamento-grid>div>p{color:var(--muted);max-width:28em}
+.form{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:20px 24px;background:#fff;padding:32px;border-top:2px solid var(--ink)}
+.field{display:flex;flex-direction:column;gap:6px}
+.field.full{grid-column:1/-1}
+.field label{font-family:var(--sans);font-weight:500;font-size:16px}
+.field input,.field select,.field textarea{width:100%;min-height:48px;padding:10px 14px;font-family:var(--serif);font-size:17px;color:var(--ink);background:#fff;border:1px solid #8A969D;border-radius:2px}
+.field textarea{min-height:110px;resize:vertical}
+.field input:focus,.field select:focus,.field textarea:focus{outline:3px solid var(--water);outline-offset:1px;border-color:var(--ink)}
+.form-actions{grid-column:1/-1;display:flex;flex-wrap:wrap;align-items:center;gap:12px 20px}
+.form-note{font-family:var(--sans);font-size:15px;color:var(--muted)}
+button.btn{border:0;cursor:pointer}
+@media (max-width:900px){.orcamento-grid{grid-template-columns:1fr;gap:32px}}
+@media (max-width:560px){.form{grid-template-columns:1fr;padding:20px}}
+
+/* botão flutuante do WhatsApp */
+.zap{position:fixed;right:max(16px,env(safe-area-inset-right));bottom:max(16px,env(safe-area-inset-bottom));z-index:20;display:grid;place-items:center;width:58px;height:58px;border-radius:50%;background:#25D366;color:#fff;box-shadow:0 2px 10px rgba(0,0,0,.28)}
+.zap:hover{background:#1DA851}
+@media print{.zap{display:none}}
+
+/* animação do menu no celular */
+.menu-bars,.menu-bars::before,.menu-bars::after{transition:top .25s ease,transform .3s ease,background-color .2s ease}
+@media (max-width:760px){
+  .site-header{position:relative;z-index:15}
+  .js .nav{display:flex;flex-direction:column;align-items:stretch;gap:0;position:absolute;left:0;right:0;top:100%;margin:0;max-height:none;overflow:visible;padding:4px var(--gutter) 20px;background:#fff;border-bottom:1px solid var(--line);box-shadow:0 16px 24px -14px rgba(0,0,0,.2);opacity:0;visibility:hidden;transform:translateY(-12px);clip-path:inset(0 0 100% 0);transition:opacity .3s ease,transform .5s cubic-bezier(.22,.61,.36,1),clip-path .5s cubic-bezier(.22,.61,.36,1),visibility 0s linear .5s}
+  .js .nav.is-open{max-height:none;margin:0;padding:4px var(--gutter) 20px;opacity:1;visibility:visible;transform:none;clip-path:inset(0 0 -40px 0);transition:opacity .3s ease,transform .5s cubic-bezier(.22,.61,.36,1),clip-path .5s cubic-bezier(.22,.61,.36,1),visibility 0s}
+  .js .nav>*{opacity:0;transform:translateY(-8px);transition:opacity .2s ease,transform .2s ease}
+  .js .nav.is-open>*{opacity:1;transform:none;transition:opacity .4s ease,transform .4s cubic-bezier(.22,.61,.36,1)}
+  .js .nav.is-open>*:nth-child(1){transition-delay:.10s}
+  .js .nav.is-open>*:nth-child(2){transition-delay:.16s}
+  .js .nav.is-open>*:nth-child(3){transition-delay:.22s}
+  .js .nav.is-open>*:nth-child(4){transition-delay:.28s}
+  .js .nav.is-open>*:nth-child(5){transition-delay:.34s}
+}
+@media (prefers-reduced-motion:reduce){
+  .js .nav,.js .nav.is-open,.js .nav>*,.js .nav.is-open>*,.menu-bars,.menu-bars::before,.menu-bars::after{transition:none!important}
+}
